@@ -3,7 +3,8 @@ const express = require ('express');
 // iniciamoas el objeto router para poder definir rutas
 const router = express.Router();
 const productController = require('../controllers/product.controller');
-const   jwtVerify = require ('../middlewares/isAuth')
+const   jwtVerify = require ('../middlewares/isAuth');
+const isAdmin = require('../middlewares/isAdmin');
 
 
 // Definimos ruta obtener todos los PRODUCTOs GET
@@ -14,15 +15,10 @@ router.get('/product/:id?', productController.getProduct);
 router.post('/product', productController.createProduct);
 
 // Borrar un PRODUCTO DELETE
-// router.delete('/product/:idproduct', jwtVerify, productController.deleteProduct);
+router.delete('/product/:id', [jwtVerify, isAdmin], productController.deleteProduct);
 
 // Actualizar un PRODUCTO PUT
-// router.put('/product/:id', productController.updateProduct);
-
-// Obtener un PRODUCTO especifico GET
-
-// LOGIN
-// router.post('/login', productController.login);
+router.put('/product/:id', productController.updateProduct);
 
 
 

@@ -34,11 +34,11 @@ const productSchema = mongoose.Schema({
     category: {
         type: Schema.Types.ObjectId,
         ref: "Category",
-        required: true
+        required: false
     },
     active: {
         type: Boolean,
-        defalut: true
+        default: true
     }
 
     // dateIngreso: {
